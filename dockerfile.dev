@@ -1,0 +1,18 @@
+FROM continuumio/miniconda3
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update && apt-get -y upgrade
+# Method1 - installing LibreOffice and java
+RUN apt-get --no-install-recommends install libreoffice -y
+RUN apt-get install -y libreoffice-java-common
+
+WORKDIR /code
+COPY dev.txt requirements.txt
+# RUN cat requirements.txt
+RUN pip3 install --no-cache-dir --upgrade -r requirements.txt
+# ENV LC_ALL=C.UTF-8
+# ENV LANG=C.UTF-8
+COPY . .
+# VOLUME "/code"
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]

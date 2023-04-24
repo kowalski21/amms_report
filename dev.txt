@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+munch==2.5.0
+docx-mailmerge2==0.6.2
+lxml
+numpy
